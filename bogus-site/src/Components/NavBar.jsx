@@ -4,18 +4,24 @@ import { Castle, Baby, BriefcaseBusiness, Workflow, Menu, X } from "lucide-react
 import logo from "../assets/images/profilepicture.jpg"
 
 const NavBar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to track whether the menu is open or not
 
+  // syling navlinks 
   const NavLinkStyles =
     "flex items-center gap-2 text-white hover:text-red-500 hover:scale-105 focus:scale-110 focus:text-red-600 transition-all";
 
+
+  /**
+   * Function
+   * @return {JSX.Element} JSX Element
+   */
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen(!isMenuOpen); // Toggle the menu state
   };
 
   return (
     <nav>
-      <div className="select-none bg-gray-700 sm:min-w-full overflow-hidden">
+      <div className="select-none bg-gray-800 sm:min-w-full overflow-hidden">
         <div className="flex justify-between items-center p-3">
           {/* Logo */}
           <div className="">
@@ -37,13 +43,13 @@ const NavBar = () => {
 
           {/* Nav Links for Desktop */}
           <div className="hidden md:flex gap-4">
-            <NavLink to="/home" className={NavLinkStyles}>
+            <NavLink to="/" className={NavLinkStyles}>
               <Castle />
               Home()
             </NavLink>
             <NavLink to="/services" className={NavLinkStyles}>
               <BriefcaseBusiness />
-              MyServices()
+              MySkills()
             </NavLink>
             <NavLink to="/about" className={NavLinkStyles}>
               <Baby />
@@ -61,7 +67,7 @@ const NavBar = () => {
           <div className="fixed inset-0 z-[9999] md:hidden">
               <div className="bg-gray-800 flex flex-col gap-4 items-center h-full space-y-8 p-4 mt-16">
               <NavLink
-                to="/home"
+                to="/"
                 className={NavLinkStyles}
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -74,7 +80,7 @@ const NavBar = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 <BriefcaseBusiness />
-                MyServices()
+                MySkills()
               </NavLink>
               <NavLink
                 to="/about"
