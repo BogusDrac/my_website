@@ -16,7 +16,7 @@ const About = () => {
     {
       title: 'Software Development Student',
       company: 'CodeSpace Academy',
-      period: '2024-2024',
+      period: '2024',
       description: 'Completed and Graduated Software Development Course.'
     }
   ];

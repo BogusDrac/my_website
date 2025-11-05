@@ -1,5 +1,4 @@
-import  { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { 
   Github, 
   ExternalLink, 
@@ -10,24 +9,42 @@ import {
   Brain, 
   Popcorn,
   Cookie,
-  Rat
+  Car,
+  Search,
+  X,
+  Filter,
+  ChevronDown
 } from 'lucide-react';
 
 // Project Images (you'll need to import or create these)
 import AddToChart from '../assets/images/add-to-cart.png';
 import AgileImage from '../assets/images/agile-board.png';
-import CertificateImage from '../assets/images/Screenshot 2024-12-13 150451.png';
+import Authentic from '../assets/images/auth.png';
 import BookImage from '../assets/images/bookconnect.png';
 import ArchaarImage from '../assets/images/archaarimg.jpg';
 import CakesImage from '../assets/images/cakesimage.png';
-import MemeImage from '../assets/images/troll-face.png';
+import MemeImage from '../assets/images/brave_screenshot_tembedri.netlify.app.png';
+import Webinfo from '../assets/images/brave_screenshot_bogusdracula.netlify.app.png';
 
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All'); // Set the initial filter to 'All'
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const [showFilters, setShowFilters] = useState(false);
   
   // Define the projects array with the project details
-  const projectCategories = ['All', 'Book Connect', 'Certificate Generater', 'Task-Manager', 'Add-To-Chart', 'Archaar App', 'Cakes App', 'Meme Generator'];
+  const projectCategories = [
+    'All', 
+    'Book Connect', 
+    'Certificate Generater', 
+    'Task-Manager', 
+    'Add-To-Chart', 
+    'Archaar App', 
+    'Cakes App', 
+    'Tembe Driving School',
+    'Web Info'
+  ];
   
 
   // Define the projects array with the project details
@@ -62,13 +79,13 @@ const Projects = () => {
     },
     {
       id: 3,
-      title: 'Certificate Generater',
+      title: 'AuthenticBoulevard eCommerce app',
       description: 'A web application that generates personalized certificates for users. It features a responsive design and allows users to input their details to create a custom certificate.',
-      technologies: ['JavaScript', 'CSS', 'HTML'],
+      technologies: ['React', 'Lucide Icons', 'TailwindCSS'],
       category: 'Certificate Generater',
-      githubLink: 'https://github.com/BogusDrac/Module_7_CS20240147_WFO2407_Group-D_Itumeleng-Matlala_JSL07.git',
-      liveLink: 'https://certificate-generater.netlify.app/',
-      image: CertificateImage,
+      githubLink: 'https://github.com/BogusDrac/authenticBoulevardcommerce.git',
+      liveLink: 'https://authenticboulevard.netlify.app/',
+      image: Authentic,
       features: [
         'Generates personalised certificates',  
         'Responsive Design'
@@ -127,170 +144,284 @@ const Projects = () => {
     },
     {
       id: 7,
-      title: 'Meme Generator',
+      title: 'Tembe Driving School',
       description: 'A fun application that allows users to create and share memes. It features a user-friendly interface and a variety of templates to choose from, making meme creation easy and enjoyable.',
-      technologies: ['React.js', 'CSS', 'Api'],
-      category: 'Meme Generator',
-      githubLink: 'https://github.com/BogusDrac/DJS07_CS20240147_WFO2407_Group-D_Itumeleng-Matlala.git',
-      liveLink: 'https://bogus-meme-generator.netlify.app/',
+      technologies: ['React.js', 'TailwindCSS',],
+      category: 'Tembe Driving School',
+      githubLink: 'https://github.com/BogusDrac/DrivingSchool.git',
+      liveLink: 'https://tembedri.netlify.app/',
       image: MemeImage,
       features: [
         'User Engagement Metrics',
-        'Mobile use Only'
+        'Mobile & Desktop',
+        'Book Online'
+      ]
+    },
+    {
+      id: 8,
+      title: 'Tembe Driving School',
+      description: 'A fun application that allows users to create and share memes. It features a user-friendly interface and a variety of templates to choose from, making meme creation easy and enjoyable.',
+      technologies: ['React.js', 'TailwindCSS',],
+      category: 'Meme Generator',
+      githubLink: 'https://github.com/BogusDrac/DrivingSchool.git',
+      liveLink: 'https://bogusdracula.netlify.app/',
+      image: Webinfo,
+      features: [
+        'Theme Change',
+        'Mobile & Desktop',
+        'Website Info'
       ]
     }
   ];
 
 
-  // Function to render the projects
-  const filteredProjects = activeFilter === 'All' 
-    ? projects 
-    : projects.filter(project => project.category === activeFilter);
+  const filteredProjects = projects.filter(project => {
+    const matchesFilter = activeFilter === 'All' || project.category === activeFilter;
+    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         project.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()));
+    return matchesFilter && matchesSearch;
+  });
 
-
-  // Function to render the projects
   const getCategoryIcon = (category) => {
-    const iconClass = "mr-2 w-5 h-5";
-    // switch statement to return the icon class based on the category
+    const iconClass = "w-5 h-5";
     switch(category) {
       case 'Book Connect': return <Globe className={iconClass} />;
       case 'Certificate Generater': return <Smartphone className={iconClass} />;
       case 'Task-Manager': return <Brain className={iconClass} />;
       case 'Add-To-Chart': return <Database className={iconClass} />;
       case 'Cakes App': return <Cookie className={iconClass} />;
-      case 'Meme Generator': return <Rat className={iconClass} />;
+      case 'Tembe Driving School': return <Car className={iconClass} />;
       case 'Archaar App': return <Popcorn className={iconClass} />;
       default: return <Code className={iconClass} />;
     }
   };
 
+  const projectCount = filteredProjects.length;
+
   return (
-    <div className="min-h-screen bg-gray-900 text-white py-16 px-4 select-none">
-      <motion.div 
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-6xl mx-auto"
-      >
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-12">
-          My <span className="text-red-500">Projects</span>
-        </h1>
-        
-        {/* Project Filters */}
-        <div className="flex flex-wrap justify-center mb-8 space-x-2">
-          {projectCategories.map((category) => (
-            <motion.button
-              key={category}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveFilter(category)}
-              className={`
-                px-4 py-2 rounded-full flex items-center gap-2 transition-all m-1
-                ${activeFilter === category 
-                  ? 'bg-red-500 text-white' 
-                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                }
-              `}
-            >
-              {getCategoryIcon(category)}
-              {category}
-            </motion.button>
-          ))}
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white py-16 px-4">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-red-500 via-pink-500 to-red-600 bg-clip-text text-transparent">
+            My Projects
+          </h1>
+          <p className="text-gray-400 text-lg">Explore my portfolio of creative solutions</p>
         </div>
-        
+
+        {/* Filter Control Panel */}
+        <div className="mb-12">
+          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 shadow-2xl">
+            {/* Search Bar */}
+            <div className="relative mb-6">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Search projects, technologies..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full bg-slate-900/50 border border-white/10 rounded-xl pl-12 pr-12 py-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-transparent transition-all"
+              />
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm('')}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              )}
+            </div>
+
+            {/* Filter Toggle Button (Mobile) */}
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className="md:hidden w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 flex items-center justify-between mb-4 hover:bg-slate-900/70 transition-all"
+            >
+              <span className="flex items-center gap-2 text-gray-300">
+                <Filter className="w-5 h-5" />
+                Filter by Category
+              </span>
+              <ChevronDown className={`w-5 h-5 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+            </button>
+
+            {/* Filter Pills */}
+            <div className={`${showFilters ? 'block' : 'hidden'} md:block`}>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-sm text-gray-400 font-medium">
+                  {projectCount} {projectCount === 1 ? 'project' : 'projects'} found
+                </span>
+                {activeFilter !== 'All' && (
+                  <button
+                    onClick={() => setActiveFilter('All')}
+                    className="text-sm text-red-400 hover:text-red-300 transition-colors"
+                  >
+                    Clear filter
+                  </button>
+                )}
+              </div>
+              
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                {projectCategories.map((category) => {
+                  const isActive = activeFilter === category;
+                  const categoryProjects = category === 'All' 
+                    ? projects.length 
+                    : projects.filter(p => p.category === category).length;
+                  
+                  return (
+                    <button
+                      key={category}
+                      onClick={() => setActiveFilter(category)}
+                      className={`group relative overflow-hidden rounded-xl px-4 py-3 transition-all duration-300 ${
+                        isActive
+                          ? 'bg-gradient-to-r from-red-600 to-pink-600 shadow-lg shadow-red-500/30 scale-105'
+                          : 'bg-slate-900/50 border border-white/10 hover:border-red-500/50 hover:bg-slate-900/70'
+                      }`}
+                    >
+                      <div className="relative z-10 flex flex-col items-center gap-2">
+                        <div className={`${isActive ? 'text-white' : 'text-gray-400 group-hover:text-red-400'} transition-colors`}>
+                          {getCategoryIcon(category)}
+                        </div>
+                        <span className={`text-sm font-medium ${isActive ? 'text-white' : 'text-gray-300'}`}>
+                          {category}
+                        </span>
+                        <span className={`text-xs ${isActive ? 'text-red-100' : 'text-gray-500'}`}>
+                          {categoryProjects}
+                        </span>
+                      </div>
+                      {isActive && (
+                        <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-pink-600 opacity-20 blur-xl" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 sm:gap-10 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <motion.div
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredProjects.map((project, i) => (
+            <div
               key={project.id}
-              whileHover={{ scale: 1.05 }}
-              className="bg-gray-800 rounded-lg shadow-lg overflow-hidden"
+              className="group bg-slate-900/50 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-white/10 hover:border-red-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/20 hover:-translate-y-2"
+              style={{ animationDelay: `${i * 0.1}s` }}
             >
               {/* Project Image */}
-              <div className="relative overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-56 object-cover transition-transform duration-300 hover:scale-110"
+              <div className="relative overflow-hidden h-56">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-60" />
+                <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/10 transition-colors duration-500" />
               </div>
 
               {/* Project Content */}
-              <div className="p-6 flex flex-col">
-                <h2 className="text-2xl font-bold mb-3 text-white">
+              <div className="p-6">
+                <h2 className="text-xl font-bold mb-2 text-white group-hover:text-red-400 transition-colors">
                   {project.title}
                 </h2>
-                
-                <p className="text-gray-400 mb-4 flex-grow">
+
+                <p className="text-gray-400 mb-4 text-sm line-clamp-3">
                   {project.description}
                 </p>
-                
+
                 {/* Technologies */}
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span 
-                      key={techIndex} 
-                      className="bg-red-500/20 text-red-300 px-3 py-1 rounded-full text-sm"
+                  {project.technologies.map((tech, index) => (
+                    <span
+                      key={index}
+                      className="bg-red-500/10 text-red-400 px-3 py-1 rounded-full text-xs font-medium border border-red-500/20"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
-                
+
                 {/* Features */}
-                <div className="mb-4">
-                  <h3 className="text-lg font-semibold text-red-500 mb-2">
+                <div className="mb-5">
+                  <h3 className="text-sm font-semibold text-red-400 mb-2">
                     Key Features:
                   </h3>
-                  <ul className="text-gray-400 list-disc list-inside text-sm">
-                    {project.features.map((feature, index) => (
-                      <li key={index}>{feature}</li>
+                  <ul className="text-gray-400 text-xs space-y-1">
+                    {project.features.slice(0, 3).map((feature, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <span className="text-red-500 mt-1">•</span>
+                        <span>{feature}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
-                
-                {/* Project Links */}
-                <div className="flex justify-between mt-auto">
-                  <motion.a 
-                    href={project.githubLink} 
-                    target="_blank" 
+
+                {/* Links */}
+                <div className="flex gap-3 pt-4 border-t border-white/10">
+                  <a
+                    href={project.githubLink}
+                    target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="text-red-500 hover:text-red-600 flex items-center gap-2"
+                    className="flex-1 bg-slate-800/50 hover:bg-red-600 text-gray-300 hover:text-white rounded-lg px-4 py-2.5 flex items-center justify-center gap-2 text-sm font-medium transition-all duration-300 border border-white/10 hover:border-red-500"
                   >
-                    <Github />
-                    GitHub
-                  </motion.a>
-                  <motion.a 
-                    href={project.liveLink} 
-                    target="_blank" 
+                    <Github size={16} />
+                    Code
+                  </a>
+                  <a
+                    href={project.liveLink}
+                    target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="text-red-500 hover:text-red-600 flex items-center gap-2"
+                    className="flex-1 bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500 text-white rounded-lg px-4 py-2.5 flex items-center justify-center gap-2 text-sm font-medium transition-all duration-300 shadow-lg shadow-red-500/30"
                   >
-                    <ExternalLink />
-                    Live Demo
-                  </motion.a>
+                    <ExternalLink size={16} />
+                    Live
+                  </a>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
-        
-        {/* No Projects Found Message */}
+
+        {/* No Projects Found */}
         {filteredProjects.length === 0 && (
-          <div className="text-center text-gray-400 mt-12">
-            <Code className="mx-auto mb-4 text-red-500" size={48} />
-            <p className="text-xl">
-              No projects found in the {activeFilter} category.
-            </p>
+          <div className="text-center py-20">
+            <div className="bg-slate-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-12 max-w-md mx-auto">
+              <Code className="mx-auto mb-4 text-red-500" size={64} />
+              <h3 className="text-2xl font-bold mb-2">No projects found</h3>
+              <p className="text-gray-400 mb-6">
+                {searchTerm ? `No results for "${searchTerm}"` : `No projects in ${activeFilter} category`}
+              </p>
+              <button
+                onClick={() => {
+                  setActiveFilter('All');
+                  setSearchTerm('');
+                }}
+                className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500 text-white rounded-lg px-6 py-3 font-medium transition-all duration-300"
+              >
+                Reset Filters
+              </button>
+            </div>
           </div>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 };
 
 export default Projects;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
