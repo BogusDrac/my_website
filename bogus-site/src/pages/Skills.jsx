@@ -19,7 +19,7 @@ const Skills = () => {
       icon: <Database className="text-red-500" size={48} />,
       title: 'Database Solutions',
       description: 'Designing and managing databases, and creating APIs.',
-      technologies: []
+      technologies: ['Json', 'Firebase']
     },
     {
       icon: <Smartphone className="text-red-500" size={48} />,

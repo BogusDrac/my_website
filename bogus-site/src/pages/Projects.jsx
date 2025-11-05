@@ -25,6 +25,7 @@ import ArchaarImage from '../assets/images/archaarimg.jpg';
 import CakesImage from '../assets/images/cakesimage.png';
 import MemeImage from '../assets/images/brave_screenshot_tembedri.netlify.app.png';
 import Webinfo from '../assets/images/brave_screenshot_bogusdracula.netlify.app.png';
+import manager from '../assets/images/clientmanager.png';
 
 
 const Projects = () => {
@@ -37,7 +38,7 @@ const Projects = () => {
   const projectCategories = [
     'All', 
     'Book Connect', 
-    'Certificate Generater', 
+    'AuthenticBoulevard App', 
     'Task-Manager', 
     'Add-To-Chart', 
     'Archaar App', 
@@ -80,15 +81,18 @@ const Projects = () => {
     {
       id: 3,
       title: 'AuthenticBoulevard eCommerce app',
-      description: 'A web application that generates personalized certificates for users. It features a responsive design and allows users to input their details to create a custom certificate.',
+      description: 'An e-commerce application that allows users to browse products and place orders via WhatsApp. It features user engagement.',
       technologies: ['React', 'Lucide Icons', 'TailwindCSS'],
-      category: 'Certificate Generater',
+      category: 'AuthenticBoulevard App',
       githubLink: 'https://github.com/BogusDrac/authenticBoulevardcommerce.git',
       liveLink: 'https://authenticboulevard.netlify.app/',
       image: Authentic,
       features: [
-        'Generates personalised certificates',  
-        'Responsive Design'
+        'Browse Products',
+        'Place Order via Whatsapp',
+        'User Engagement Metrics',
+        'Multi-platform Integration',
+        'Responsive Visualizations'
       ]
     },
     {
@@ -145,7 +149,7 @@ const Projects = () => {
     {
       id: 7,
       title: 'Tembe Driving School',
-      description: 'A fun application that allows users to create and share memes. It features a user-friendly interface and a variety of templates to choose from, making meme creation easy and enjoyable.',
+      description: 'A Driving school landing page with snippets of k53 learsons and location.',
       technologies: ['React.js', 'TailwindCSS',],
       category: 'Tembe Driving School',
       githubLink: 'https://github.com/BogusDrac/DrivingSchool.git',
@@ -159,10 +163,10 @@ const Projects = () => {
     },
     {
       id: 8,
-      title: 'Tembe Driving School',
-      description: 'A fun application that allows users to create and share memes. It features a user-friendly interface and a variety of templates to choose from, making meme creation easy and enjoyable.',
+      title: 'Web Info',
+      description: 'Simple customer explanation of websites.',
       technologies: ['React.js', 'TailwindCSS',],
-      category: 'Meme Generator',
+      category: 'Web Info',
       githubLink: 'https://github.com/BogusDrac/DrivingSchool.git',
       liveLink: 'https://bogusdracula.netlify.app/',
       image: Webinfo,
@@ -170,6 +174,20 @@ const Projects = () => {
         'Theme Change',
         'Mobile & Desktop',
         'Website Info'
+      ]
+    },
+    {
+      id: 9,
+      title: 'Client Manager App',
+      description: 'Simple customer explanation of websites.',
+      technologies: ['React.js', 'TailwindCSS',],
+      category: 'Meme Generator',
+      githubLink: 'https://github.com/BogusDrac/DrivingSchool.git',
+      liveLink: 'https://bogusdracula.netlify.app/',
+      image: manager,
+      features: [
+        'Add clients data',
+        'save data to local storage'
       ]
     }
   ];
@@ -187,7 +205,7 @@ const Projects = () => {
     const iconClass = "w-5 h-5";
     switch(category) {
       case 'Book Connect': return <Globe className={iconClass} />;
-      case 'Certificate Generater': return <Smartphone className={iconClass} />;
+      case 'AuthenticBoulevard App': return <Smartphone className={iconClass} />;
       case 'Task-Manager': return <Brain className={iconClass} />;
       case 'Add-To-Chart': return <Database className={iconClass} />;
       case 'Cakes App': return <Cookie className={iconClass} />;

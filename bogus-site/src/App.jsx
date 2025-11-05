@@ -43,6 +43,7 @@ function App() {
 
     return (
       <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center overflow-hidden">
+        
       {/* Animated Text */}
       <div className="flex text-3xl md:text-5xl font-bold text-red-500 mb-10">
         {text.split("").map((char, i) => (
