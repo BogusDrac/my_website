@@ -23,23 +23,24 @@ function App() {
     const timer = setTimeout(() => {
       setIsLoading(false)
     }, 4000)
-
+    return () => clearTimeout(timer)
   }, [])
 
   if (isLoading) {
     const text = "Welcome to BoGuSsite"
 
     const letterVariants = {
-      hidden: { opacity: 0, y: 20 },
+      hidden: { opacity: 0, y: 30 },
       visible: (i) => ({
         opacity: 1,
         y: 0,
       transition: {
         delay: i * 0.08, // controls speed of each letter appearing
-        duration: 0.4,
+        duration: 0.6,
+        ease: "easeOut",
       }
-       }),
-      }
+    }),
+    }
 
     return (
       <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center overflow-hidden">
@@ -72,8 +73,33 @@ function App() {
           duration: 1,
           type: "spring",
           stiffness: 80,
+          ease: "easeOut",
         }}
       />
+
+      {/* Progress indicator */}
+      <motion.div
+        className="mt-12 flex gap-2"
+        initial={{ opacity:0 }}
+        animate={{ opacity:1 }}
+        transition={{ delay:1.5 }}
+        >
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              className="w-2 h-2 bg-red-500 rounded-full"
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.3, 1, 0.3],
+              }}
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+                delay: i * 0.2,
+              }}
+            />
+          ))}
+        </motion.div>
     </div>
     );
   }

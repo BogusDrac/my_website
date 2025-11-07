@@ -3,7 +3,7 @@ import { Award, Code, Book, Briefcase } from 'lucide-react';
 
 const About = () => {
   const skills = [
-    'React-Native', 'Node.js', 'TypeScript', 'Python', 'Git', 'PyGames'
+    'React-Native', 'Node.js', 'TypeScript', 'Python', 'Git', 'PyGames', 'Bash'
   ];
 
   const experiences = [
