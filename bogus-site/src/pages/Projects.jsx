@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Slide } from 'react-reveal';
 import { 
   Github, 
   ExternalLink, 
@@ -16,7 +17,7 @@ import {
   ChevronDown
 } from 'lucide-react';
 
-// Project Images (you'll need to import or create these)
+// Project Images
 import AddToChart from '../assets/images/add-to-cart.png';
 import AgileImage from '../assets/images/agile-board.png';
 import Authentic from '../assets/images/auth.png';
@@ -29,12 +30,11 @@ import manager from '../assets/images/clientmanager.png';
 
 
 const Projects = () => {
-  const [activeFilter, setActiveFilter] = useState('All'); // Set the initial filter to 'All'
+  const [activeFilter, setActiveFilter] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
-
   const [showFilters, setShowFilters] = useState(false);
   
-  // Define the projects array with the project details
+  // projects array with the project details
   const projectCategories = [
     'All', 
     'Book Connect', 
@@ -48,7 +48,7 @@ const Projects = () => {
   ];
   
 
-  // Define the projects array with the project details
+  // projects array with the project details
   const projects = [
     {
       id: 1,
@@ -222,64 +222,95 @@ const Projects = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-red-500 via-pink-500 to-red-600 bg-clip-text text-transparent">
-            My Projects
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">
+            My <span className="text-red-500">Projects</span>
           </h1>
           <p className="text-gray-400 text-lg">Explore my portfolio of creative solutions</p>
         </div>
 
         {/* Filter Control Panel */}
-        <div className="mb-12">
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 shadow-2xl">
-            {/* Search Bar */}
-            <div className="relative mb-6">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search projects, technologies..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full bg-slate-900/50 border border-white/10 rounded-xl pl-12 pr-12 py-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-transparent transition-all"
-              />
-              {searchTerm && (
-                <button
-                  onClick={() => setSearchTerm('')}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              )}
-            </div>
-
-            {/* Filter Toggle Button (Mobile) */}
-            <button
-              onClick={() => setShowFilters(!showFilters)}
-              className="md:hidden w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 flex items-center justify-between mb-4 hover:bg-slate-900/70 transition-all"
-            >
-              <span className="flex items-center gap-2 text-gray-300">
-                <Filter className="w-5 h-5" />
-                Filter by Category
-              </span>
-              <ChevronDown className={`w-5 h-5 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
-            </button>
-
-            {/* Filter Pills */}
-            <div className={`${showFilters ? 'block' : 'hidden'} md:block`}>
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-sm text-gray-400 font-medium">
-                  {projectCount} {projectCount === 1 ? 'project' : 'projects'} found
-                </span>
-                {activeFilter !== 'All' && (
+        <div className="mb-8">
+          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-4 shadow-xl">
+            {/* Search and Filter Row */}
+            <div className="flex flex-col md:flex-row gap-3 items-center">
+              {/* Search Bar */}
+              <div className="relative flex-1 w-full">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <input
+                  type="text"
+                  placeholder="Search projects..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full bg-slate-900/50 border border-white/10 rounded-lg pl-10 pr-10 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-transparent transition-all"
+                />
+                {searchTerm && (
                   <button
-                    onClick={() => setActiveFilter('All')}
-                    className="text-sm text-red-400 hover:text-red-300 transition-colors"
+                    onClick={() => setSearchTerm('')}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
                   >
-                    Clear filter
+                    <X className="w-4 h-4" />
                   </button>
                 )}
               </div>
-              
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+
+              {/* Filter Dropdown */}
+              <div className="relative w-full md:w-auto filter-dropdown">
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setShowFilters(!showFilters)}
+                    className="flex-1 md:flex-none bg-slate-900/50 border border-white/10 rounded-lg px-4 py-2.5 flex items-center justify-between gap-3 hover:bg-slate-900/70 transition-all text-sm"
+                  >
+                    <span className="flex items-center gap-2 text-gray-300">
+                      <Filter className="w-4 h-4" />
+                      <span className="font-medium">{activeFilter}</span>
+                      <span className="text-xs text-gray-500">({projectCount})</span>
+                    </span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+                  </button>
+                  
+                  {/* Reset Filter Button */}
+                  {activeFilter !== 'All' && (
+                    <button
+                      onClick={() => setActiveFilter('All')}
+                      className="bg-red-600/20 border border-red-500/30 rounded-lg px-3 py-2.5 hover:bg-red-600/30 transition-all text-sm group"
+                      title="Reset filter"
+                    >
+                      <X className="w-4 h-4 text-red-400 group-hover:text-red-300" />
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Backdrop Blur Overlay - Outside the filter panel */}
+        {showFilters && (
+          <div 
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9998]"
+            onClick={() => setShowFilters(false)}
+          />
+        )}
+
+        {/* Dropdown Menu - Full Screen Overlay - Outside the filter panel */}
+        {showFilters && (
+          <div className="fixed inset-0 z-[9999] flex items-start justify-center pt-20 px-4 pointer-events-none">
+            <div className="bg-slate-900 border border-white/10 rounded-xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300 pointer-events-auto">
+              <div className="p-4 border-b border-white/10 bg-slate-800/50">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                    <Filter className="w-5 h-5 text-red-400" />
+                    Filter Projects
+                  </h3>
+                  <button
+                    onClick={() => setShowFilters(false)}
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+              <div className="max-h-96 overflow-y-auto">
                 {projectCategories.map((category) => {
                   const isActive = activeFilter === category;
                   const categoryProjects = category === 'All' 
@@ -289,114 +320,108 @@ const Projects = () => {
                   return (
                     <button
                       key={category}
-                      onClick={() => setActiveFilter(category)}
-                      className={`group relative overflow-hidden rounded-xl px-4 py-3 transition-all duration-300 ${
-                        isActive
-                          ? 'bg-gradient-to-r from-red-600 to-pink-600 shadow-lg shadow-red-500/30 scale-105'
-                          : 'bg-slate-900/50 border border-white/10 hover:border-red-500/50 hover:bg-slate-900/70'
+                      onClick={() => {
+                        setActiveFilter(category);
+                        setShowFilters(false);
+                      }}
+                      className={`w-full px-5 py-4 flex items-center gap-3 hover:bg-slate-800 transition-all border-b border-white/5 ${
+                        isActive ? 'bg-red-600/20 text-red-400' : 'text-gray-300'
                       }`}
                     >
-                      <div className="relative z-10 flex flex-col items-center gap-2">
-                        <div className={`${isActive ? 'text-white' : 'text-gray-400 group-hover:text-red-400'} transition-colors`}>
-                          {getCategoryIcon(category)}
-                        </div>
-                        <span className={`text-sm font-medium ${isActive ? 'text-white' : 'text-gray-300'}`}>
-                          {category}
-                        </span>
-                        <span className={`text-xs ${isActive ? 'text-red-100' : 'text-gray-500'}`}>
-                          {categoryProjects}
-                        </span>
+                      <div className={`${isActive ? 'text-red-400' : 'text-gray-400'} transition-colors`}>
+                        {getCategoryIcon(category)}
                       </div>
-                      {isActive && (
-                        <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-pink-600 opacity-20 blur-xl" />
-                      )}
+                      <span className="flex-1 text-left text-sm font-medium">{category}</span>
+                      <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${
+                        isActive ? 'bg-red-500/20 text-red-400 ring-1 ring-red-500/30' : 'bg-slate-800 text-gray-500'
+                      }`}>
+                        {categoryProjects}
+                      </span>
                     </button>
                   );
                 })}
               </div>
             </div>
           </div>
-        </div>
+        )}
 
-        {/* Projects Grid */}
+        {/* Projects Grid with Slide Animations */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjects.map((project, i) => (
-            <div
-              key={project.id}
-              className="group bg-slate-900/50 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-white/10 hover:border-red-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/20 hover:-translate-y-2"
-              style={{ animationDelay: `${i * 0.1}s` }}
-            >
-              {/* Project Image */}
-              <div className="relative overflow-hidden h-56">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-60" />
-                <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/10 transition-colors duration-500" />
-              </div>
-
-              {/* Project Content */}
-              <div className="p-6">
-                <h2 className="text-xl font-bold mb-2 text-white group-hover:text-red-400 transition-colors">
-                  {project.title}
-                </h2>
-
-                <p className="text-gray-400 mb-4 text-sm line-clamp-3">
-                  {project.description}
-                </p>
-
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="bg-red-500/10 text-red-400 px-3 py-1 rounded-full text-xs font-medium border border-red-500/20"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+            <Slide key={project.id} left={i % 2 === 0} right={i % 2 !== 0}>
+              <div className="group bg-slate-900/50 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-white/10 hover:border-red-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/20 hover:-translate-y-2 h-full">
+                {/* Project Image */}
+                <div className="relative overflow-hidden h-56">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-60" />
+                  <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/10 transition-colors duration-500" />
                 </div>
 
-                {/* Features */}
-                <div className="mb-5">
-                  <h3 className="text-sm font-semibold text-red-400 mb-2">
-                    Key Features:
-                  </h3>
-                  <ul className="text-gray-400 text-xs space-y-1">
-                    {project.features.slice(0, 3).map((feature, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <span className="text-red-500 mt-1">•</span>
-                        <span>{feature}</span>
-                      </li>
+                {/* Project Content */}
+                <div className="p-6">
+                  <h2 className="text-xl font-bold mb-2 text-white group-hover:text-red-400 transition-colors">
+                    {project.title}
+                  </h2>
+
+                  <p className="text-gray-400 mb-4 text-sm line-clamp-3">
+                    {project.description}
+                  </p>
+
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.map((tech, index) => (
+                      <span
+                        key={index}
+                        className="bg-red-500/10 text-red-400 px-3 py-1 rounded-full text-xs font-medium border border-red-500/20"
+                      >
+                        {tech}
+                      </span>
                     ))}
-                  </ul>
-                </div>
+                  </div>
 
-                {/* Links */}
-                <div className="flex gap-3 pt-4 border-t border-white/10">
-                  <a
-                    href={project.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 bg-slate-800/50 hover:bg-red-600 text-gray-300 hover:text-white rounded-lg px-4 py-2.5 flex items-center justify-center gap-2 text-sm font-medium transition-all duration-300 border border-white/10 hover:border-red-500"
-                  >
-                    <Github size={16} />
-                    Code
-                  </a>
-                  <a
-                    href={project.liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500 text-white rounded-lg px-4 py-2.5 flex items-center justify-center gap-2 text-sm font-medium transition-all duration-300 shadow-lg shadow-red-500/30"
-                  >
-                    <ExternalLink size={16} />
-                    Live
-                  </a>
+                  {/* Features */}
+                  <div className="mb-5">
+                    <h3 className="text-sm font-semibold text-red-400 mb-2">
+                      Key Features:
+                    </h3>
+                    <ul className="text-gray-400 text-xs space-y-1">
+                      {project.features.slice(0, 3).map((feature, index) => (
+                        <li key={index} className="flex items-start gap-2">
+                          <span className="text-red-500 mt-1">•</span>
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Links */}
+                  <div className="flex gap-3 pt-4 border-t border-white/10">
+                    <a
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-slate-800/50 hover:bg-red-600 text-gray-300 hover:text-white rounded-lg px-4 py-2.5 flex items-center justify-center gap-2 text-sm font-medium transition-all duration-300 border border-white/10 hover:border-red-500"
+                    >
+                      <Github size={16} />
+                      Code
+                    </a>
+                    <a
+                      href={project.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500 text-white rounded-lg px-4 py-2.5 flex items-center justify-center gap-2 text-sm font-medium transition-all duration-300 shadow-lg shadow-red-500/30"
+                    >
+                      <ExternalLink size={16} />
+                      Live
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Slide>
           ))}
         </div>
 
@@ -427,19 +452,3 @@ const Projects = () => {
 };
 
 export default Projects;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
