@@ -27,6 +27,7 @@ import CakesImage from '../assets/images/cakesimage.png';
 import MemeImage from '../assets/images/brave_screenshot_tembedri.netlify.app.png';
 import Webinfo from '../assets/images/brave_screenshot_bogusdracula.netlify.app.png';
 import manager from '../assets/images/clientmanager.png';
+import weather from '../assets/images/bogusweather.png';
 
 
 const Projects = () => {
@@ -37,14 +38,10 @@ const Projects = () => {
   // projects array with the project details
   const projectCategories = [
     'All', 
-    'Book Connect', 
-    'AuthenticBoulevard App', 
-    'Task-Manager', 
-    'Add-To-Chart', 
-    'Archaar App', 
-    'Cakes App', 
-    'Tembe Driving School',
-    'Web Info'
+    'E-Commerce App',
+    'Tools',
+    'Infomative',
+    'Fun'
   ];
   
 
@@ -55,7 +52,7 @@ const Projects = () => {
       title: 'Add-to-chart app',
       description: 'Simple add to chart app with advanced features to store the data on firebase and items can be deleted when clicked.',
       technologies: ['HTMl', 'CSS', 'JavacSript', 'FireBase'],
-      category: 'Add-To-Chart',
+      category: 'Fun',
       githubLink: 'https://github.com/BogusDrac/Module_10R_CS20240147_WFO2407_Group-D_Itumeleng-Matlala_SDF10_R.git',
       liveLink: 'https://bright-profiterole-7eb504.netlify.app/',
       image: AddToChart,
@@ -69,7 +66,7 @@ const Projects = () => {
       title: 'Agile Board',
       description: 'An interactive task management tool that allows users to create, update, and delete tasks. The Agile Board is designed to enhance productivity by providing a visual representation of tasks and their statuses.',
       technologies: ['Vanilla JavaScript', 'CSS', 'HTML'],
-      category: 'Task-Manager',
+      category: 'Tools',
       githubLink: 'https://github.com/BogusDrac/JSL_Portfolio_Piece_CS20240147_WFO2407_Group-D_Itumeleng-Matlala_JSL11.git',
       liveLink: 'https://agile-task-board.netlify.app/  ',
       image: AgileImage,
@@ -83,7 +80,7 @@ const Projects = () => {
       title: 'AuthenticBoulevard eCommerce app',
       description: 'An e-commerce application that allows users to browse products and place orders via WhatsApp. It features user engagement.',
       technologies: ['React', 'Lucide Icons', 'TailwindCSS'],
-      category: 'AuthenticBoulevard App',
+      category: 'E-Commerce App',
       githubLink: 'https://github.com/BogusDrac/authenticBoulevardcommerce.git',
       liveLink: 'https://authenticboulevard.netlify.app/',
       image: Authentic,
@@ -100,7 +97,7 @@ const Projects = () => {
       title: 'Book Connect',
       description: 'A platform that allows users to browse and search for books efficiently. It provides user engagement metrics and integrates with multiple platforms for a seamless experience.',
       technologies: ['Html', 'CSS', 'Vanilla JavaScript'],
-      category: 'Book Connect',
+      category: 'Fun',
       githubLink: 'https://github.com/BogusDrac/CS20240147_WFO2407_Group-D_Itumeleng-Matlala_DJS03.git',
       liveLink: 'https://book-connect-app-bogus.netlify.app/',
       image: BookImage,
@@ -117,7 +114,7 @@ const Projects = () => {
       title: 'Archaar App',
       description: 'An e-commerce application that allows users to browse products and place orders via WhatsApp. It features user engagement',
       technologies: ['React.js', 'TailwindCSS', 'Lucide-icons', 'WhatsApp'],
-      category: 'Archaar App',
+      category: 'E-Commerce App',
       githubLink: 'https://github.com/BogusDrac/artchaar_project.git',
       liveLink: 'https://mamas-archaar.netlify.app/',
       image: ArchaarImage,
@@ -134,7 +131,7 @@ const Projects = () => {
       title: 'Cakes App',
       description: 'A delightful application that allows users to browse a variety of cakes and place orders via WhatsApp. It emphasizes user engagement and offers a responsive design for all devices.',
       technologies: ['React.js', 'TailwindCSS', 'Lucide-icons', 'WhatsApp'],
-      category: 'Cakes App',
+      category: 'E-Commerce App',
       githubLink: 'https://github.com/BogusDrac/bakery_project.git',
       liveLink: 'https://mamas-cakes.netlify.app/',
       image: CakesImage,
@@ -151,7 +148,7 @@ const Projects = () => {
       title: 'Tembe Driving School',
       description: 'A Driving school landing page with snippets of k53 learsons and location.',
       technologies: ['React.js', 'TailwindCSS',],
-      category: 'Tembe Driving School',
+      category: 'E-Commerce App',
       githubLink: 'https://github.com/BogusDrac/DrivingSchool.git',
       liveLink: 'https://tembedri.netlify.app/',
       image: MemeImage,
@@ -166,7 +163,7 @@ const Projects = () => {
       title: 'Web Info',
       description: 'Simple customer explanation of websites.',
       technologies: ['React.js', 'TailwindCSS',],
-      category: 'Web Info',
+      category: 'Infomative',
       githubLink: 'https://github.com/BogusDrac/DrivingSchool.git',
       liveLink: 'https://bogusdracula.netlify.app/',
       image: Webinfo,
@@ -181,13 +178,29 @@ const Projects = () => {
       title: 'Client Manager App',
       description: 'Simple customer explanation of websites.',
       technologies: ['React.js', 'TailwindCSS',],
-      category: 'Meme Generator',
+      category: 'Tools',
       githubLink: 'https://github.com/BogusDrac/DrivingSchool.git',
       liveLink: 'https://bogusdracula.netlify.app/',
       image: manager,
       features: [
         'Add clients data',
         'save data to local storage'
+      ]
+    },
+    {
+      id: 10,
+      title: 'Weather App',
+      description: 'Weather app using OpenWeatherMap Api.',
+      technologies: ['React.js', 'TailwindCSS', 'Lucide Icons', ],
+      category: 'Tools',
+      githubLink: 'https://github.com/BogusDrac/Weather24hrs.git',
+      liveLink: 'https://bogusweather.netlify.app/',
+      image: weather,
+      features: [
+        'Change Theme Dark & light',
+        'Dynamic',
+        'API',
+        'Doesnt Track or ask Location permission'
       ]
     }
   ];
@@ -204,13 +217,10 @@ const Projects = () => {
   const getCategoryIcon = (category) => {
     const iconClass = "w-5 h-5";
     switch(category) {
-      case 'Book Connect': return <Globe className={iconClass} />;
-      case 'AuthenticBoulevard App': return <Smartphone className={iconClass} />;
-      case 'Task-Manager': return <Brain className={iconClass} />;
-      case 'Add-To-Chart': return <Database className={iconClass} />;
-      case 'Cakes App': return <Cookie className={iconClass} />;
-      case 'Tembe Driving School': return <Car className={iconClass} />;
-      case 'Archaar App': return <Popcorn className={iconClass} />;
+      case 'Tools': return <Globe className={iconClass} />;
+      case 'E-Commerce App': return <Smartphone className={iconClass} />;
+      case 'Fun': return <Brain className={iconClass} />;
+      case 'Infomative': return <Database className={iconClass} />;
       default: return <Code className={iconClass} />;
     }
   };

@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "caniuse-lite": "^1.0.30001755",
     "lucide-react": "^0.468.0",
     "motion": "^11.14.1",
     "react": "^18.3.1",

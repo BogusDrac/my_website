@@ -14,7 +14,6 @@ import Hero from "./Components/Hero";
 import PageNotFound from "./pages/PageNotFound";
 
 import { motion } from "framer-motion";
-import Statistics from "./Components/Statistics";
 
 
 function App() {
