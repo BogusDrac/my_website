@@ -7,10 +7,7 @@ import {
   Database, 
   Smartphone, 
   Globe, 
-  Brain, 
-  Popcorn,
-  Cookie,
-  Car,
+  Brain,
   Search,
   X,
   Filter,
@@ -28,6 +25,11 @@ import MemeImage from '../assets/images/brave_screenshot_tembedri.netlify.app.pn
 import Webinfo from '../assets/images/brave_screenshot_bogusdracula.netlify.app.png';
 import manager from '../assets/images/clientmanager.png';
 import weather from '../assets/images/bogusweather.png';
+import ServiceFinder from '../assets/images/logo.png';
+import bmi from '../assets/images/BMI.png';
+import bankingapp from '../assets/images/bankinapp.png';
+import elegant from '../assets/images/elegant.png';
+
 
 
 const Projects = () => {
@@ -202,7 +204,67 @@ const Projects = () => {
         'API',
         'Doesnt Track or ask Location permission'
       ]
-    }
+    },
+    {
+      id: 11,
+      title: 'Services Finder App',
+      description: 'Service finder app; Post and Browser Services.',
+      technologies: ['React.js', 'TailwindCSS', 'Lucide Icons', 'Firebase',  ],
+      category: 'Tools',
+      githubLink: 'https://github.com/BogusDrac/servicesfinder.git',
+      liveLink: 'https://bogusservices.netlify.app/',
+      image: ServiceFinder,
+      features: [
+        'User Authentification using firbase',
+        'Add User services stored firebase database',
+        'API'
+      ]
+    },
+    {
+      id: 12,
+      title: 'BMI Calculator App',
+      description: 'Weather app using OpenWeatherMap Api.',
+      technologies: ['React.js', 'TailwindCSS', 'Lucide Icons'  ],
+      category: 'Tools',
+      githubLink: 'https://github.com/BogusDrac/BMI_Calculator.git',
+      liveLink: 'https://bogusbmi.netlify.app',
+      image: bmi,
+      features: [
+        'User Authentification using firbase',
+        'Add User services stored firebase database',
+        'API'
+      ]
+    },
+    {
+      id: 12,
+      title: 'Bank Landing Page App',
+      description: 'Simple Banking app.',
+      technologies: ['React.js', 'TailwindCSS', 'Lucide Icons'  ],
+      category: 'Fun',
+      githubLink: 'https://github.com/BogusDrac/SDF_Portfolio_Piece_CS20240147_WFO2407_Group-D_Itumeleng-Matlala_SDF11.git',
+      liveLink: 'https://bogusbmi.netlify.app',
+      image: bankingapp,
+      features: [
+        'User Authentification using firbase',
+        'Add User services stored firebase database',
+        'API'
+      ]
+    },
+    {
+      id: 13,
+      title: 'Elegant Gifts App',
+      description: 'E-commerce clothing app.',
+      technologies: ['React.js', 'TailwindCSS', 'Lucide Icons'  ],
+      category: 'E-Commerce App',
+      githubLink: 'https://bogusbmi.netlify.app',
+      liveLink: 'https://bogusbmi.netlify.app',
+      image: elegant,
+      features: [
+        'User Authentification using firbase',
+        'Add User services stored firebase database',
+        'API'
+      ]
+    },
   ];
 
 

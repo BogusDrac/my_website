@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 4000)
+    }, 6000)
     return () => clearTimeout(timer)
   }, [])
 
@@ -78,28 +78,18 @@ function App() {
       />
 
       {/* Progress indicator */}
-      <motion.div
-        className="mt-12 flex gap-2"
-        initial={{ opacity:0 }}
-        animate={{ opacity:1 }}
-        transition={{ delay:1.5 }}
-        >
-          {[0, 1, 2].map((i) => (
-            <motion.div
-              key={i}
-              className="w-2 h-2 bg-red-500 rounded-full"
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.3, 1, 0.3],
-              }}
-              transition={{
-                duration: 1,
-                repeat: Infinity,
-                delay: i * 0.2,
-              }}
-            />
-          ))}
-        </motion.div>
+      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2">
+        <div className="loader flex justify-center items-center">
+          <span><span></span><span></span><span></span><span></span></span>
+          <div className="base text-red-500">
+            <span></span>
+            <div className="face"></div>
+          </div>
+        </div>
+      </div>
+      <div className="longfazers">
+        <span></span><span></span><span></span><span></span>
+      </div>
     </div>
     );
   }
