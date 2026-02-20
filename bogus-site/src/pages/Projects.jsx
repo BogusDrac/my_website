@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Slide } from 'react-reveal';
+import { useState, useEffect, useRef } from 'react';
 import { 
   Github, 
   ExternalLink, 
@@ -29,6 +28,45 @@ import ServiceFinder from '../assets/images/logo.png';
 import bmi from '../assets/images/BMI.png';
 import bankingapp from '../assets/images/bankinapp.png';
 import elegant from '../assets/images/elegant.png';
+
+
+
+
+
+
+const useReveal = () => {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return { ref, visible };
+};
+
+const Slide = ({ children, left, right, index = 0 }) => {
+  const { ref, visible } = useReveal();
+  const tx = left ? '-40px' : right ? '40px' : '0px';
+  return (
+    <div
+      ref={ref}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translate(0,0)' : `translate(${tx}, 20px)`,
+        transition: `opacity 0.55s ease ${index * 60}ms, transform 0.55s ease ${index * 60}ms`,
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
 
 
 
@@ -182,7 +220,7 @@ const Projects = () => {
       technologies: ['React.js', 'TailwindCSS',],
       category: 'Tools',
       githubLink: 'https://github.com/BogusDrac/DrivingSchool.git',
-      liveLink: 'https://bogusdracula.netlify.app/',
+      liveLink: 'https://artchaar-clients.netlify.app/',
       image: manager,
       features: [
         'Add clients data',
@@ -236,7 +274,7 @@ const Projects = () => {
       ]
     },
     {
-      id: 12,
+      id: 13,
       title: 'Bank Landing Page App',
       description: 'Simple Banking app.',
       technologies: ['React.js', 'TailwindCSS', 'Lucide Icons'  ],
@@ -251,7 +289,7 @@ const Projects = () => {
       ]
     },
     {
-      id: 13,
+      id: 14,
       title: 'Elegant Gifts App',
       description: 'E-commerce clothing app.',
       technologies: ['React.js', 'TailwindCSS', 'Lucide Icons'  ],
@@ -270,9 +308,10 @@ const Projects = () => {
 
   const filteredProjects = projects.filter(project => {
     const matchesFilter = activeFilter === 'All' || project.category === activeFilter;
-    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()));
+    const matchesSearch =
+      project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      project.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()));
     return matchesFilter && matchesSearch;
   });
 
